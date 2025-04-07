@@ -1,17 +1,13 @@
 'use client';
 
+import React from 'react';
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+// Remove unused router import but keep it commented in case needed later
+// import { useRouter } from 'next/navigation';
 import FileUpload from '@/components/ui/FileUpload';
 import ThreeJsViewer from '@/components/3d/ThreeJsViewer';
-
-interface VisualizationData {
-  // In a real application, this would contain the data needed for visualization
-  id?: string;
-  created?: string;
-}
 
 export default function Dashboard() {
   const [stage, setStage] = useState<'upload' | 'processing' | 'visualization'>('upload');
@@ -22,8 +18,8 @@ export default function Dashboard() {
     propertyImages: [],
     floorPlan: null,
   });
-  const [visualizationData, setVisualizationData] = useState<VisualizationData | null>(null);
-  const router = useRouter();
+  // Remove unused router but keep it commented in case needed later
+  // const router = useRouter();
 
   const handlePropertyImagesUpload = (files: File[]) => {
     setUploads(prev => ({
@@ -67,10 +63,6 @@ export default function Dashboard() {
     // Simulate processing delay
     setTimeout(() => {
       // In a real application, you would get back visualization data from your server
-      setVisualizationData({
-        id: 'project-' + Date.now(),
-        created: new Date().toISOString()
-      });
       setStage('visualization');
     }, 3000);
   };
@@ -256,7 +248,7 @@ export default function Dashboard() {
               <div className="w-16 h-16 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin mb-6"></div>
               <h2 className="text-xl font-semibold mb-2">Processing Your Files</h2>
               <p className="text-slate-600">
-                We're creating your 3D visualization. This may take a few minutes.
+                We&apos;re creating your 3D visualization. This may take a few minutes.
               </p>
             </div>
           </div>

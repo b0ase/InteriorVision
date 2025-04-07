@@ -1,12 +1,11 @@
 'use client';
 
-import { useState, useRef, Suspense } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { OrbitControls, Environment, useGLTF, Grid, PerspectiveCamera } from '@react-three/drei';
-import * as THREE from 'three';
+import React from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, Environment } from '@react-three/drei';
 
 // Sample Room Model - In a real app this would be generated based on uploaded plans
-const RoomModel = () => {
+function Room() {
   const wallHeight = 2.5;
   const roomWidth = 5;
   const roomLength = 7;
@@ -144,71 +143,33 @@ const RoomModel = () => {
       </mesh>
     </group>
   );
-};
+}
 
-// Camera controls setup
-const CameraSetup = () => {
-  const { camera, gl } = useThree();
-  
-  // Set initial camera position
-  useFrame(() => {
-    if (camera.position.x === 0 && camera.position.y === 0 && camera.position.z === 0) {
-      camera.position.set(7, 5, 7);
-      camera.lookAt(0, 0, 0);
-    }
-  });
-  
+function Lights() {
   return (
-    <OrbitControls
-      enablePan={true}
-      enableZoom={true}
-      enableRotate={true}
-      target={[0, 1, 0]}
-      makeDefault
-    />
+    <>
+      <ambientLight intensity={0.4} />
+      <directionalLight 
+        position={[5, 8, 5]} 
+        intensity={1} 
+        castShadow 
+        shadow-mapSize-width={1024} 
+        shadow-mapSize-height={1024}
+      />
+      <directionalLight position={[-5, 3, -5]} intensity={0.5} />
+    </>
   );
-};
+}
 
-// Main component
-const ThreeJsViewer = () => {
+export default function ThreeJsViewer() {
   return (
-    <Canvas shadows>
-      <PerspectiveCamera makeDefault position={[7, 5, 7]} fov={45} />
-      <CameraSetup />
-      
-      <Suspense fallback={null}>
-        {/* Lighting */}
-        <ambientLight intensity={0.4} />
-        <directionalLight 
-          position={[5, 8, 5]} 
-          intensity={1} 
-          castShadow 
-          shadow-mapSize-width={1024} 
-          shadow-mapSize-height={1024}
-        />
-        <directionalLight position={[-5, 3, -5]} intensity={0.5} />
-        
-        {/* 3D Content */}
-        <RoomModel />
-        
-        {/* Environment map for reflections */}
-        <Environment preset="apartment" />
-        
-        {/* Grid */}
-        <Grid
-          args={[20, 20]} 
-          cellSize={1}
-          cellThickness={0.5}
-          cellColor="#6f6f6f"
-          sectionSize={5}
-          sectionThickness={1}
-          sectionColor="#9d4b4b"
-          position={[0, -0.01, 0]}
-          infiniteGrid
-        />
-      </Suspense>
-    </Canvas>
+    <div className="w-full h-full">
+      <Canvas shadows camera={{ position: [5, 5, 5], fov: 50 }}>
+        <Room />
+        <Lights />
+        <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+        <Environment preset="city" />
+      </Canvas>
+    </div>
   );
-};
-
-export default ThreeJsViewer; 
+} 

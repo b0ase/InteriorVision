@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Services() {
   // Services data
@@ -150,7 +149,7 @@ export default function Services() {
               <div className="flex-1">
                 <h3 className="text-xl font-semibold mb-2 text-slate-900">Consultation & Discovery</h3>
                 <p className="text-slate-700">
-                  We start by understanding your needs, preferences, and budget. During this phase, we'll discuss your vision and collect photos and measurements of your space.
+                  We start by understanding your needs, preferences, and budget. During this phase, we&apos;ll discuss your vision and collect photos and measurements of your space.
                 </p>
               </div>
             </div>

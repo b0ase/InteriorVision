@@ -117,7 +117,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-5xl">
           <h2 className="text-3xl font-bold text-center mb-10 text-slate-900">Our Work</h2>
           <p className="text-center text-slate-700 mb-12 max-w-3xl mx-auto">
-            Browse some of our recent interior renovation projects and see how we've transformed spaces for our clients.
+            Browse some of our recent interior renovation projects and see how we&apos;ve transformed spaces for our clients.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Contact() {
   return (
@@ -149,8 +148,8 @@ export default function Contact() {
                     <div className="ml-3">
                       <h3 className="text-lg font-semibold text-slate-900">Our Office</h3>
                       <p className="text-slate-700">
-                        123 Design Street<br />
-                        San Francisco, CA 94107<br />
+                        123 Park Avenue<br />
+                        New York, NY 10017<br />
                         United States
                       </p>
                     </div>
@@ -203,10 +202,16 @@ export default function Contact() {
               </div>
               
               {/* Map Placeholder */}
-              <div className="bg-slate-200 rounded-lg overflow-hidden shadow-md h-64 w-full">
-                <div className="h-full w-full flex items-center justify-center">
-                  <p className="text-slate-600">Interactive Map Here</p>
-                </div>
+              <div className="w-full h-64 md:h-96">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sus!4v1710864000000!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
               
               {/* Social Media */}
@@ -249,7 +254,7 @@ export default function Contact() {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-lg font-semibold text-slate-900 mb-2">How long does a typical renovation project take?</h3>
               <p className="text-slate-700">
-                Project timelines vary based on the scope of work. A single room redesign can take 2-4 weeks, while a complete home renovation may take 8-12 weeks or more. During your consultation, we'll provide a detailed timeline specific to your project.
+                Project timelines vary based on the scope of work. A single room redesign can take 2-4 weeks, while a complete home renovation may take 8-12 weeks or more. During your consultation, we&apos;ll provide a detailed timeline specific to your project.
               </p>
             </div>
             
@@ -263,14 +268,14 @@ export default function Contact() {
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-lg font-semibold text-slate-900 mb-2">What information do I need to provide for a 3D visualization?</h3>
               <p className="text-slate-700">
-                For the most accurate visualizations, we'll need photos of your space, measurements, and any specific design preferences. Basic floor plans are helpful but not required - our team can create measurements during the initial consultation.
+                For the most accurate visualizations, we&apos;ll need photos of your space, measurements, and any specific design preferences. Basic floor plans are helpful but not required - our team can create measurements during the initial consultation.
               </p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-lg font-semibold text-slate-900 mb-2">Can you work with my existing furniture and décor?</h3>
               <p className="text-slate-700">
-                Absolutely! We're happy to incorporate existing pieces that you love into your new design. Our goal is to create a space that reflects your personal style and meets your functional needs, whether that involves all new items or a mix of new and existing pieces.
+                Absolutely! We&apos;re happy to incorporate existing pieces that you love into your new design. Our goal is to create a space that reflects your personal style and meets your functional needs, whether that involves all new items or a mix of new and existing pieces.
               </p>
             </div>
           </div>
