@@ -18,6 +18,9 @@ export default function Dashboard() {
     propertyImages: [],
     floorPlan: null,
   });
+  const [projectName, setProjectName] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveSuccess, setSaveSuccess] = useState(false);
   // Remove unused router but keep it commented in case needed later
   // const router = useRouter();
 
@@ -65,6 +68,31 @@ export default function Dashboard() {
       // In a real application, you would get back visualization data from your server
       setStage('visualization');
     }, 3000);
+  };
+
+  const handleSaveProject = async () => {
+    if (!projectName.trim()) {
+      alert('Please enter a project name');
+      return;
+    }
+
+    setIsSaving(true);
+    try {
+      // In a real application, you would:
+      // 1. Upload files to a storage service (e.g., AWS S3)
+      // 2. Save project metadata to a database
+      // 3. Handle the response appropriately
+
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 3000);
+    } catch (error) {
+      alert('Failed to save project. Please try again.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -268,19 +296,35 @@ export default function Dashboard() {
             </div>
             
             <div className="p-6 bg-slate-50">
-              <div className="flex justify-between items-center">
+              <div className="flex flex-col space-y-4">
+                <div className="flex items-center space-x-4">
+                  <input
+                    type="text"
+                    value={projectName}
+                    onChange={(e) => setProjectName(e.target.value)}
+                    placeholder="Enter project name"
+                    className="flex-1 px-4 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-slate-400"
+                  />
+                  <button
+                    onClick={handleSaveProject}
+                    disabled={isSaving || !projectName.trim()}
+                    className={`px-4 py-2 bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors ${
+                      isSaving || !projectName.trim() ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+                  >
+                    {isSaving ? 'Saving...' : 'Save Project'}
+                  </button>
+                </div>
+                {saveSuccess && (
+                  <div className="text-green-600 text-sm">
+                    Project saved successfully!
+                  </div>
+                )}
                 <button
                   onClick={() => setStage('upload')}
                   className="px-4 py-2 border border-slate-300 rounded-md text-slate-700 hover:bg-slate-100 transition-colors"
                 >
                   Upload New Files
-                </button>
-                
-                <button
-                  onClick={() => alert('This would save your project in a real application.')}
-                  className="px-4 py-2 bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors"
-                >
-                  Save Project
                 </button>
               </div>
             </div>
