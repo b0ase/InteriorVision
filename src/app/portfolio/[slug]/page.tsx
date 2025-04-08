@@ -4,11 +4,12 @@ import Navigation from '@/components/ui/Navigation';
 import { projectDetails } from '@/data/projects';
 import { Metadata } from 'next';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string }
-}): Promise<Metadata> {
+type PageProps = {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const project = projectDetails[params.slug as keyof typeof projectDetails];
   
   if (!project) {
@@ -24,11 +25,7 @@ export async function generateMetadata({
   };
 }
 
-export default function ProjectDetails({
-  params,
-}: {
-  params: { slug: string }
-}) {
+export default function ProjectDetails({ params }: PageProps) {
   const project = projectDetails[params.slug as keyof typeof projectDetails];
 
   if (!project) {
