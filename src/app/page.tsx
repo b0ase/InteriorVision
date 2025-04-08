@@ -157,7 +157,7 @@ export default function Home() {
             <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow">
               <div className="relative h-64">
                 <Image 
-                  src="/images/interior-3.jpg" 
+                  src="/portfolio/spa-bathroom/main.jpg" 
                   alt="Bathroom renovation" 
                   fill
                   style={{objectFit: 'cover'}}

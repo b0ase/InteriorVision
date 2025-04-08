@@ -26,7 +26,7 @@ export default function Portfolio() {
       id: 3,
       title: 'Spa-Like Bathroom',
       description: 'A complete bathroom renovation creating a relaxing retreat with modern amenities, a walk-in shower, and custom vanity.',
-      imageSrc: '/images/interior-3.jpg',
+      imageSrc: '/portfolio/spa-bathroom/main.jpg',
       category: 'Bathroom',
       location: 'Los Angeles, CA',
       year: '2022'
@@ -53,7 +53,7 @@ export default function Portfolio() {
       id: 6,
       title: 'Coastal-Inspired Dining Room',
       description: 'A bright, airy dining space with coastal elements, custom table, and statement lighting for entertaining.',
-      imageSrc: '/images/interior-3.jpg',
+      imageSrc: '/portfolio/coastal-dining/main.jpg',
       category: 'Dining Room',
       location: 'Miami, FL',
       year: '2021'
@@ -80,7 +80,7 @@ export default function Portfolio() {
       id: 9,
       title: 'Scandinavian-Inspired Apartment',
       description: 'A complete renovation of a small apartment using Scandinavian design principles for a bright, functional space.',
-      imageSrc: '/images/interior-3.jpg',
+      imageSrc: '/portfolio/scandinavian/main.jpg',
       category: 'Whole Home',
       location: 'Portland, OR',
       year: '2021'

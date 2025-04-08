@@ -8,6 +8,7 @@ import Image from 'next/image';
 // import { useRouter } from 'next/navigation';
 import FileUpload from '@/components/ui/FileUpload';
 import ThreeJsViewer from '@/components/3d/ThreeJsViewer';
+import { processFloorPlan, FloorPlanData } from '@/lib/floorPlanProcessor';
 
 export default function Dashboard() {
   const [stage, setStage] = useState<'upload' | 'processing' | 'visualization'>('upload');
@@ -18,6 +19,7 @@ export default function Dashboard() {
     propertyImages: [],
     floorPlan: null,
   });
+  const [floorPlanData, setFloorPlanData] = useState<FloorPlanData | undefined>();
   const [projectName, setProjectName] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
@@ -31,13 +33,13 @@ export default function Dashboard() {
     }));
   };
 
-  const handleFloorPlanUpload = (files: File[]) => {
-    if (files.length > 0) {
-      setUploads(prev => ({
-        ...prev,
-        floorPlan: files[0],
-      }));
-    }
+  const handleFloorPlanUpload = async (files: File[]) => {
+    if (files.length === 0) return;
+
+    setUploads(prev => ({
+      ...prev,
+      floorPlan: files[0]
+    }));
   };
 
   const handleRemovePropertyImage = (index: number) => {
@@ -60,14 +62,22 @@ export default function Dashboard() {
       return;
     }
 
-    // In a real application, you would upload the files to your server here
     setStage('processing');
 
-    // Simulate processing delay
-    setTimeout(() => {
-      // In a real application, you would get back visualization data from your server
+    try {
+      // Process the floor plan
+      const result = await processFloorPlan(uploads.floorPlan);
+      
+      if (!result.success || !result.data) {
+        throw new Error(result.message || 'Failed to process floor plan');
+      }
+
+      setFloorPlanData(result.data);
       setStage('visualization');
-    }, 3000);
+    } catch (error) {
+      alert('Failed to process floor plan. Please try again.');
+      setStage('upload');
+    }
   };
 
   const handleSaveProject = async () => {
@@ -80,7 +90,7 @@ export default function Dashboard() {
     try {
       // In a real application, you would:
       // 1. Upload files to a storage service (e.g., AWS S3)
-      // 2. Save project metadata to a database
+      // 2. Save project metadata and floor plan data to a database
       // 3. Handle the response appropriately
 
       // Simulate API call delay
@@ -139,17 +149,17 @@ export default function Dashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8 max-w-5xl">
-        <h1 className="text-3xl font-bold mb-8">Design Your Space</h1>
+        <h1 className="text-3xl font-bold mb-8 text-slate-900">Design Your Space</h1>
 
         {stage === 'upload' && (
           <div className="bg-white rounded-lg shadow-md p-6">
-            <h2 className="text-xl font-semibold mb-6">Upload Your Files</h2>
+            <h2 className="text-xl font-semibold mb-6 text-slate-900">Upload Your Files</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left Column - Property Images Upload */}
               <div>
-                <h3 className="text-lg font-medium mb-2">Property Images</h3>
-                <p className="text-slate-600 mb-4">
+                <h3 className="text-lg font-medium mb-2 text-slate-900">Property Images</h3>
+                <p className="text-slate-800 mb-4">
                   Upload photos of your current space from different angles.
                 </p>
                 
@@ -191,14 +201,14 @@ export default function Dashboard() {
 
               {/* Right Column - Floor Plan Upload */}
               <div>
-                <h3 className="text-lg font-medium mb-2">Floor Plan</h3>
-                <p className="text-slate-600 mb-4">
+                <h3 className="text-lg font-medium mb-2 text-slate-900">Floor Plan</h3>
+                <p className="text-slate-800 mb-4">
                   Upload a floor plan of your space. This will help us create accurate 3D visualizations.
                 </p>
                 
                 {/* Example Floor Plan */}
                 <div className="mb-6 bg-slate-50 p-4 rounded-md border border-slate-200">
-                  <h4 className="font-medium text-sm text-slate-700 mb-2">Example Floor Plan:</h4>
+                  <h4 className="font-medium text-sm text-slate-900 mb-2">Example Floor Plan:</h4>
                   <div className="relative h-48 bg-white">
                     <Image
                       src="/images/floorplan.jpg"
@@ -207,7 +217,7 @@ export default function Dashboard() {
                       style={{objectFit: 'contain'}}
                     />
                   </div>
-                  <p className="text-xs text-slate-500 mt-2 text-center">
+                  <p className="text-xs text-slate-700 mt-2 text-center">
                     Your floor plan can be a simple sketch or a professional drawing
                   </p>
                 </div>
@@ -292,7 +302,7 @@ export default function Dashboard() {
             </div>
             
             <div className="h-[60vh]">
-              <ThreeJsViewer />
+              <ThreeJsViewer floorPlanData={floorPlanData} />
             </div>
             
             <div className="p-6 bg-slate-50">
