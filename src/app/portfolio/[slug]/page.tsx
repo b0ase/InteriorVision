@@ -3,7 +3,14 @@ import Image from 'next/image';
 import Navigation from '@/components/ui/Navigation';
 import { projectDetails } from '@/data/projects';
 
-export default function ProjectDetails({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function ProjectDetails({ params, searchParams }: PageProps) {
   const project = projectDetails[params.slug as keyof typeof projectDetails];
 
   if (!project) {
