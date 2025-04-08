@@ -77,8 +77,6 @@ function Room({ room }: RoomProps) {
       {/* Right Wall with Windows */}
       <group position={[width/2, height/2, 0]} rotation={[0, -Math.PI/2, 0]}>
         {windows.filter(w => w.wall === 'right').map((window, index) => {
-          const windowStart = length * (window.position - window.width/2);
-          const windowEnd = length * (window.position + window.width/2);
           const bottomHeight = height/2 - window.height/2;
           const topHeight = height/2 - window.height/2;
           

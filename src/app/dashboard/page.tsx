@@ -74,7 +74,7 @@ export default function Dashboard() {
 
       setFloorPlanData(result.data);
       setStage('visualization');
-    } catch (error) {
+    } catch (_) {
       alert('Failed to process floor plan. Please try again.');
       setStage('upload');
     }
@@ -98,7 +98,7 @@ export default function Dashboard() {
       
       setSaveSuccess(true);
       setTimeout(() => setSaveSuccess(false), 3000);
-    } catch (error) {
+    } catch (_) {
       alert('Failed to save project. Please try again.');
     } finally {
       setIsSaving(false);
