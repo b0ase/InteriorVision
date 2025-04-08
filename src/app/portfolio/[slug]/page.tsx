@@ -13,7 +13,7 @@ export default function ProjectDetails({ params }: { params: { slug: string } })
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-slate-900">Project Not Found</h1>
-            <p className="mt-2 text-slate-600">The project you're looking for doesn't exist.</p>
+            <p className="mt-2 text-slate-600">The project you&apos;re looking for doesn&apos;t exist.</p>
             <Link 
               href="/portfolio"
               className="mt-4 inline-block text-slate-900 font-medium hover:text-slate-700"
