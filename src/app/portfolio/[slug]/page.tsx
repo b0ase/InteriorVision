@@ -10,7 +10,7 @@ interface PageProps {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default function ProjectDetails({ params, searchParams }: PageProps) {
+export default function ProjectDetails({ params }: PageProps) {
   const project = projectDetails[params.slug as keyof typeof projectDetails];
 
   if (!project) {
