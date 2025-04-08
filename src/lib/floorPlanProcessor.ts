@@ -241,7 +241,6 @@ async function detectOpenings(imageData: ImageData, room: Room): Promise<Room> {
 export async function processFloorPlan(file: File): Promise<UploadResponse> {
   try {
     // Convert File to ImageData
-    const img = new Image();
     const imageData = await createImageData(file);
     
     // Detect rooms
