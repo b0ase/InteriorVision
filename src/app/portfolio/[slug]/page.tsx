@@ -2,12 +2,29 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/ui/Navigation';
 import { projectDetails } from '@/data/projects';
+import { Metadata } from 'next';
 
-export default async function ProjectDetails({
-  params,
-}: {
+type Props = {
   params: { slug: string }
-}) {
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = projectDetails[params.slug as keyof typeof projectDetails];
+  
+  if (!project) {
+    return {
+      title: 'Project Not Found | Interior Vision',
+      description: 'The requested project could not be found.',
+    };
+  }
+
+  return {
+    title: `${project.title} | Interior Vision`,
+    description: project.description,
+  };
+}
+
+export default function ProjectDetails({ params }: Props) {
   const project = projectDetails[params.slug as keyof typeof projectDetails];
 
   if (!project) {
